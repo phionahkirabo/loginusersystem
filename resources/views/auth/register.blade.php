@@ -12,7 +12,7 @@
     @endif 
       ///
         
-    <form action="{{ route('register-user') }}" method="POST">
+    <form action="/register" method="POST">
           {{-- @if(session::("success"))
         <div class="alert alert-success">{{ session::get('success') }}</div>
         @endif 
@@ -36,6 +36,10 @@
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password"><br>
           <span style="color:red;">@error('password') {{$message}} @enderror</span>
+
+          <label for="psw"><b> Confirm Password</b></label>
+          <input type="password" placeholder="confirm_Password" name="password_confirmation"><br>
+          
       
           {{-- <label for="psw-repeat"><b>Repeat Password</b></label> --}}
           {{-- <input type="password" placeholder="Repeat Password" name="psw-repeat" required> --}}

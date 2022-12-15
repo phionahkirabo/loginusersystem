@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\blog;
 
 class userloginAuthController extends Controller
 {
@@ -17,7 +18,7 @@ return view('auth.registration');
         $request->validate([
             'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:5|max:12'
+            'password'=>'required confirmed|min:5|max:12'
         ]);
 
         $user =new User;
@@ -52,5 +53,20 @@ return view('auth.registration');
             $request->session()->regenerate();
             return redirect(url('login'));
         }
-
+  public function users(){
+    // return auth()->user();
+    $id= auth()->user()->id;
+    $data = User::all()->where('id','!=',$id);
+    return view('auth.home',compact('data'));
+  }
+  public function viewuserblog(){
+    // return auth()->user();
+    $id= auth()->user()->id;
+    $data = User::find()->where('id',$id);
+    return view('auth.view_users_blogs',compact('data'));
+  }
+  public function viewblog($email){
+    $blogs = blog::all();
+    return view('auth.view_users_blogs',compact('blogs'));
+  }
 }

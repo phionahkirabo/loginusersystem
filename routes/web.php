@@ -1,5 +1,6 @@
 <?php
  use App\Http\Controllers\userloginAuthController;
+ use App\Http\Controllers\blogpostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-route::get('/login',[userloginAuthController::class,'login']);
-route::get('/registration',[userloginAuthController::class,'registration']);
-route::post('/register-user',[userloginAuthController::class,'registerUser']) ->name('register-user');
-route::post('/loginuser',[userloginAuthController::class,'loginUser']) ->name('login-user');
-route::get('/logout',[userloginAuthController::class,'logout']);
+ route::post('/addblog',[blogpostController::class,'blog'])->name('add_blog');
+route::get('view_blog/{email}',[blogpostController::class,'viewBlogs'])->name('viewblogs');
+// route::post('/register-user',[userloginAuthController::class,'registerUser']) ->name('register-user');
+// route::post('/loginuser',[userloginAuthController::class,'loginUser']) ->name('login-user');
+ route::get('/home',[userloginAuthController::class,'users']);
+ //route::get('/home',[userloginAuthController::class,'users']);
+ route::get('/viewuserblog',[userloginAuthController::class,'viewuserblog']);
+ Route::get('/add_blogs', function () {
+    return view('auth.add_blog');
+})->name('add');
+Route::get('test/{email}',[userloginAuthController::class,'viewblog'] );
+
+
+//Route::post('/logout', function () {
+//     return view('auth.logout');
+// });

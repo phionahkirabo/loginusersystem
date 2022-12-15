@@ -8,7 +8,7 @@
 
     @endif
     
-<form action="{{route('login-user')}}" method="post">
+<form action="/login" method="post">
     @csrf
     {{-- <div class="imgcontainer">
       <img src="img_avatar2.png" alt="Avatar" class="avatar">
