@@ -2,8 +2,8 @@
 @section('content')
 <?php
 use App\Models\blog;
-  $blog_count =blog::find()->where('id',$id);
-  $blog_counts = collect($blog_count)->count();  
+  //$blog_count =blog::find($id);
+  //$blog_counts = collect($blog_count)->count();  
 //   if( $blog_counts ==0){
 //     echo 'zero blogs';
 //   }else {
@@ -12,7 +12,7 @@ use App\Models\blog;
 ?>
 
 {{-- <div class="card " style="background-color: teal"> --}}
- @foreach($blogs as $data)
+ {{-- @foreach($blogs as $data) --}}
  
     {{-- <div class="card-header">
         {{ $data->title }}
@@ -30,21 +30,21 @@ use App\Models\blog;
  
     <br> --}}
     <div class="card bg-info">
-        <div class="card-header bg-info text-white ">{{$data->title}}</div>
+        <div class="card-header bg-info text-white ">{{$blogs->title}}</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{URL::to('/')}}/images/blog/{{$data->image}}" style="width:50px;length:50px;"><br>
+                        <img src="{{URL::to('/')}}/images/blog/{{$blogs->image}}" style="width:50px;length:50px;"><br>
                     
                     </div>
                     <div class="col-md-6">
-                       {{$data->content}}      
+                       {{$blogs->content}}      
                     </div>
                </div>
             </div>
     </div>
 
- @endforeach
+ {{-- @endforeach --}}
 {{-- </div> --}}
 
  

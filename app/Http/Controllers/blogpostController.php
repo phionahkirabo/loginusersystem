@@ -26,8 +26,32 @@ class blogpostController extends Controller
         return back()->with('success',"Your blog added  successful");
         
     }
-    public function viewBlogs($email){
-       $blogs = blog::all()->where('email',$email);
-       return view('auth.view_users_blogs',compact('blogs','email'));
+    public function viewBlogs($id){
+       //$blogs = blog::all()->where('id',$id);
+       $blogs = blog::find($id);
+       return view('auth.view_users_blogs',compact('blogs','id'));
+    }
+    public function viewmyblog($id){
+        $id= auth()->user()->id;
+        $blogs = blog::all()->where('id',$id);
+        // $blogs = blog::find($id);
+        // return $id;
+        return view('auth.view_my_blog',compact('blogs','id'));
+     }
+     public function editmyblog($id){
+        $blogs= blog::where('id','=',$id)->first();
+        return $blogs;
+        return view('edit_blog',compact('blog'));
+    }
+    public function updateblog(Request $request,$id){
+    $title =$request->title;
+    $image =$request->image;
+    $content =$request->content;
+    student::where('id','=',$id)->update([
+        'title'=> $title,
+        'image'=> $image,
+        'content'=> $content
+    ]);
+    return redirect('/view_my_blog')->with('success','blogs  updated successfully');
     }
 }

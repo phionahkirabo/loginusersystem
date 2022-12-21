@@ -32,7 +32,7 @@
 
         
    
-        <a href="{{url('/home')}}">Users</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{route('add')}}">Add a blog</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('/viewuserblog')}}">View my blogs</a>
+        <a href="{{url('/home')}}">Users</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{route('add')}}">Add a blog</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url('/view_my_blog/{id}')}}">View my blogs</a>
         <br> <br> <br> <br> 
       
        @yield('content')

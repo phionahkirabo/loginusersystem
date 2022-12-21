@@ -19,7 +19,7 @@
           <td>{{ $stu->name }}</td>
           <td>{{ $stu->email }}</td>
           
-        <td> <a href="{{url('test')}}/{{ $stu->email }}">View blog</a></td>
+        <td> <a href="/view_blog/{{ $stu->id }}">View blog</a></td>
           
         </tr>
         

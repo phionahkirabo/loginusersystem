@@ -60,7 +60,7 @@ return view('auth.registration');
     return view('auth.home',compact('data'));
   }
   public function viewuserblog(){
-    // return auth()->user();
+     // return auth()->user();
     $id= auth()->user()->id;
     $data = User::find()->where('id',$id);
     return view('auth.view_users_blogs',compact('data'));
