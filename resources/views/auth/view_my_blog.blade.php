@@ -74,8 +74,12 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-
+  @if(session('delete'))
+  <span style="color: blue">{{ session('delete') }}</span>
+@endif
 <h2>view my blog</h2>
+{{-- <button style="margin-right:5%;float: right;">logout</button> --}}
+<button style="margin-right:5%;float: right;"><a href="{{url('home')}}" class="btn btn-dange">Back</a></button>
 <div style="margin-right:10%;float: right;">
     {{-- <a href="{{url('add-student')}}">view my blog</a> --}}
     {{-- <a href="{{url('/view_my_blog/{id}')}}">view my blog</a> --}}
@@ -99,7 +103,7 @@ tr:nth-child(even) {
     <td>{{ $blog->title }}</td>
     <td><img src="{{URL::to('/')}}/images/blog/{{$blog->image}}" style="width:50px;length:50px;"></td>
     <td>{{ $blog->content}}</td>
-    <td> <a href="{{ route('editblog/'.$blog->id)}}">edit</a> | <td> <a href="">delete</a> </td>
+    <td> <a href="{{ url('/edit_blog')}}/{{ $blog->id }}">edit</a> | <td><a href="{{ url('/delete_blog')}}/{{ $blog->id }}">delete</a> </td>
     
   </tr>
   

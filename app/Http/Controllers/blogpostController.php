@@ -31,27 +31,46 @@ class blogpostController extends Controller
        $blogs = blog::find($id);
        return view('auth.view_users_blogs',compact('blogs','id'));
     }
-    public function viewmyblog($id){
+    public function viewmyblog(){
+        
         $id= auth()->user()->id;
-        $blogs = blog::all()->where('id',$id);
-        // $blogs = blog::find($id);
-        // return $id;
+        $blogs = blog::all()->where('user_id',$id);
+        // $blogs = blog::all()->where('id',$id);
+        // return $blogs;
+       
         return view('auth.view_my_blog',compact('blogs','id'));
      }
      public function editmyblog($id){
         $blogs= blog::where('id','=',$id)->first();
-        return $blogs;
-        return view('edit_blog',compact('blog'));
+        
+        return view('auth.edit_blog',compact('blogs'));
     }
     public function updateblog(Request $request,$id){
-    $title =$request->title;
-    $image =$request->image;
-    $content =$request->content;
-    student::where('id','=',$id)->update([
-        'title'=> $title,
-        'image'=> $image,
-        'content'=> $content
-    ]);
-    return redirect('/view_my_blog')->with('success','blogs  updated successfully');
+        $blog = blog::find($id);
+        if($request->hasFile('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images/blog'), $filename);
+            $blog['image']= $filename;
+        }
+        
+        $blog->title = $request->title;
+        $blog->content = $request->content;
+        $blog->save();
+        return redirect('/view_my_blog')->with('success','blogs  updated successfully');
+    
+    
+    
+    // blog::where('id','=',$id)->update([
+    //     'title'=> $title,
+    //     'image'=> $image,
+    //     'content'=> $content
+    // ]);
+    // return redirect('/view_my_blog')->with('success','blogs  updated successfully');
+    }
+    public function deleteBlog($id){
+        // return $id;
+        blog::find($id)->delete();
+        return back()->with( 'delete','Blog is deleted ');
     }
 }

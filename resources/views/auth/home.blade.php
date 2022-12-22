@@ -2,7 +2,7 @@
 @extends('auth.cover')
 @section('content')
    
-    
+<a href="{{url('auth.home')}}" class="btn btn-dange">Back</a>
     <table class="table table-bordered table-striped">
         <tr>
           <th>#</th>
